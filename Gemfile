@@ -5,10 +5,14 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
 
-group :development, :test do
-gem 'sqlite3'
-end
 
+group :development, :test do
+  gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.0.0'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'capybara'
+  gem 'simplecov', '~> 0.7.1'
+end
 group :production do
   gem 'pg'
 end
