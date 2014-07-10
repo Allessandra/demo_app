@@ -1,0 +1,29 @@
+{
+  "RSpec": {
+    "coverage": {
+      "C:/Sites/demo_app/app/controllers/home_page_controller.rb": [
+        1,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null
+      ],
+      "C:/Sites/demo_app/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null
+      ]
+    },
+    "timestamp": 1404988912
+  }
+}
