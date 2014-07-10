@@ -6,8 +6,12 @@ describe "App pages" do
       visit '/home_page/home'
       puts page.body
       page.should have_content('Our Demo App')
-      expect(page).to have_title('Demo App|Home')
     end
+    
+     it "should have the title" do
+       visit '/home_page/home'
+       expect(page).to have_title('Demo App|Home')
+     end
   end
   
   describe "About page" do
@@ -15,9 +19,12 @@ describe "App pages" do
       visit '/home_page/about'
       puts page.body
       page.should have_content('About Us')
-      expect(page).to have_title('Demo App|About Us')
 
     end
+    it "should have the right title" do
+       visit '/home_page/about'
+       expect(page).to have_title('Demo App|About Us')
+     end
   end
   
   describe "Location page" do
@@ -25,8 +32,11 @@ describe "App pages" do
       visit '/home_page/location'
       puts page.body
       page.should have_content('Location')
-      expect(page).to have_title('Demo App|Location')
     end
+     it "should have the right title" do
+       visit '/home_page/location'
+       expect(page).to have_title('Demo App|Location')
+     end
   end
   
   describe "Contact page" do
@@ -34,8 +44,11 @@ describe "App pages" do
       visit '/home_page/contact'
       puts page.body
       page.should have_content('Contact Us')
-      expect(page).to have_title('Demo App|Contact Us')
     end
+    it "should have the right title" do
+       visit '/home_page/contact'
+       expect(page).to have_title('Demo App|Contact Us')
+     end
   end
   
 end
