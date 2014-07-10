@@ -8,7 +8,7 @@ describe "App pages" do
       page.should have_content('Our Demo App')
     end
     
-     it "should have the title" do
+     it "should have the right title" do
        visit '/home_page/home'
        expect(page).to have_title('Demo App|Home')
      end
