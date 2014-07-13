@@ -1,0 +1,9 @@
+@import "bootstrap";
+/*
+ * Globals
+ */
+/* Move down content because we have a ﬁxed navbar that is 50px tall */
+body {
+ padding-top: 50px;
+ padding-bottom: 20px;
+}
