@@ -4,9 +4,9 @@
       "C:/Sites/demo_app/app/helpers/application_helper.rb": [
         1,
         1,
-        4,
-        4,
         2,
+        2,
+        0,
         null,
         2,
         null,
@@ -21,14 +21,10 @@
         1,
         null
       ],
-      "C:/Sites/demo_app/app/controllers/blogs_controller.rb": [
+      "C:/Sites/demo_app/app/controllers/users_controller.rb": [
         1,
         null,
         1,
-        null,
-        null,
-        1,
-        null,
         null,
         null,
         null
@@ -39,16 +35,8 @@
         null,
         1,
         null
-      ],
-      "C:/Sites/demo_app/app/controllers/users_controller.rb": [
-        1,
-        null,
-        1,
-        null,
-        null,
-        null
       ]
     },
-    "timestamp": 1405254914
+    "timestamp": 1405255353
   }
 }
