@@ -18,7 +18,7 @@ end
     visit about_path
     page.should have_content("About Us")
   end
-   it "should have the h1 'Home'" do
+   it "should have the h1 'About Us'" do
     visit about_path
     expect(page).to have_title('Demo App | About Us' )
   end

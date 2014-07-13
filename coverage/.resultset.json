@@ -3,7 +3,6 @@
     "coverage": {
       "C:/Sites/demo_app/app/helpers/application_helper.rb": [
         1,
-        null,
         1,
         0,
         0,
@@ -42,6 +41,6 @@
         null
       ]
     },
-    "timestamp": 1405250767
+    "timestamp": 1405252628
   }
 }
