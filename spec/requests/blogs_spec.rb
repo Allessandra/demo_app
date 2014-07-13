@@ -6,7 +6,7 @@ describe "Home page" do
     visit root_path
     page.should have_content("Home")
   end
-   it "should have the title 'Home'" do
+   it "should have the title 'Demo'" do
     visit root_path
     expect(page).to have_title('Demo' )
   end
@@ -16,7 +16,7 @@ end
     visit about_path
     page.should have_content("About Us")
   end
-   it "should have the title 'About Us'" do
+   it "should have the title 'Demo | About Us'" do
     visit about_path
     expect(page).to have_title('Demo | About Us' )
   end
