@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", :type => :request do
-  describe "Home page" do
+  describe "Sign up page" do
   it "should have the h1 'Sign Up'" do
     visit signup_path
     page.should have_content("Sign Up")
