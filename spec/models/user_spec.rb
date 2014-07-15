@@ -31,7 +31,7 @@ end
 
 describe "when email format is not valid" do
   it "should be not valid" do
-    addresses= %w[user@foo,com user_at.org user.ex@foo.]
+    addresses= %w[user@foo,com user_at.org user.ex@foo. foo@bar_vaz.com]
     addresses.each do|invalid_add|
       @user.email=invalid_add
       @user.should_not be_valid
@@ -86,7 +86,7 @@ describe"return value of authenticate method" do
   describe "with invalid password" do
     let(:user_for_invalid_password){found_user.authenticate("invalid")}
     it {should_not == user_for_invalid_password}
-    specify { user_for_invalid_password.should be_false}
+    specify { expect(user_for_invalid_password).to be_falsey}
   end
 end
 
