@@ -4,11 +4,11 @@
       "C:/Sites/demo_app/app/helpers/application_helper.rb": [
         1,
         1,
-        0,
-        0,
+        4,
+        4,
         0,
         null,
-        0,
+        4,
         null,
         null,
         null
@@ -21,14 +21,31 @@
         1,
         null
       ],
+      "C:/Sites/demo_app/app/controllers/users_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "C:/Sites/demo_app/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null
+      ],
       "C:/Sites/demo_app/app/models/user.rb": [
         1,
         1,
-        5,
+        3,
         1,
-        60,
-        100,
-        20,
+        6,
+        10,
+        2,
         null,
         null,
         1,
@@ -50,6 +67,6 @@
         null
       ]
     },
-    "timestamp": 1405421509
+    "timestamp": 1405431819
   }
 }
