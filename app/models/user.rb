@@ -12,7 +12,7 @@ VAILD_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 validates :email, presence: true,
 format: { with: VAILD_EMAIL_REGEX},
 uniqueness: {case_sensitive: false}
-validates :password, presence: true ,length:{minimum:6}
+validates :password, presence: true ,length:{minimum:8}
 validates :password_confirmation, presence:true
 
 def self.name_longer_than_eight

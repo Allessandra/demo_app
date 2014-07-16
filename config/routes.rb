@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   resources :users
   root :to => 'blogs#home'
   get '/about' => 'blogs#about'
+  get '/contact' =>'blogs#contact'
   get '/signup' => 'users#new'
-  
+  post '/send_email' => 'blogs#send_email'
   
  
 
