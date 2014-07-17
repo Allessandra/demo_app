@@ -2,12 +2,16 @@
 
 Rails.application.routes.draw do
   resources :users
+  resources :sessions, only: [:create,:destroy]
   root :to => 'blogs#home'
   get '/about' => 'blogs#about'
   get '/contact' =>'blogs#contact'
+  
   get '/signup' => 'users#new'
   post '/send_email' => 'blogs#send_email'
   
+  #get '/signout' => 'sessions#destroy'
+ 
  
 
   # The priority is based upon order of creation: first created -> highest priority.
