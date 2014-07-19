@@ -22,7 +22,10 @@ RSpec.describe "AuthenticationPages", :type => :request do
       it {should_not have_link('Sign in',href:root_path)}
       it {should_not have_link('Sign up',href:signup_path)}
       
-    
+      describe "followed by signout"do
+      before {click_link "Sign out"}
+      it {should have_link ('Sign in')}
+      end
     end
   end
  

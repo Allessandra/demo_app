@@ -91,6 +91,16 @@ describe"return value of authenticate method" do
   end
 end
 
+describe "remember token"do
+  before {@user.save}
+  #its(:remember_token){ should_not be_blank}
+  it "should have a nonblank remember token" do
+    subject.remember_token.should_not be_blank
+    #subject->@user  
+  end
+end
+
+
 
 
 

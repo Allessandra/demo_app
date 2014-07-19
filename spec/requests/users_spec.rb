@@ -64,6 +64,7 @@ RSpec.describe "Users", :type => :request do
         before{click_button submit}
         let(:user){User.find_by_email("user@example.com")}
         it { expect(page).to have_title("Demo | #{user.name}")}
+        it {should have_link ('Sign out')}
       end
     end
   end

@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
 has_secure_password
+
 before_save{|user| user.email=user.email.downcase}
+#before_save{|user| user.remember_token="hhh"}
+before_save :create_remember_token
+
 before_validation do |user| 
   o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten 
   string = (0...4).map { o[rand(o.length)] }.join
@@ -23,4 +27,10 @@ def self.name_longer_than_eight
   User.where("length(name) > 8")
 end
 
+private 
+def create_remember_token
+  self.remember_token=SecureRandom.urlsafe_base64
+  #unique string
+  
+end
 end
