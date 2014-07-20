@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-before_filter :signed_in_user ,only:[:edit]
-
+before_filter :signed_in_user ,only:[:edit ,:update]
+before_filter :correct_user, only[:edit , :update]
 def new #to new view
   @user=User.new
 end
@@ -23,7 +23,7 @@ def create #handle
 end
 
 def edit #edit view
-  @user=User.find(params[:id])
+  #@user=User.find(params[:id])
 end
 
 def update #handle edit form
@@ -46,7 +46,16 @@ end
 def signed_in_user
   #flash[:notice]="please sign in"
   #redirect_to root_path unless signed_in?
-  redirect_to(root_path, :notice => "please sign in") unless signed_in?
+  #raise signed_in?.inspect
+  unless signed_in?
+    store_location
+    redirect_to(root_path, :notice => "please sign in") 
+  end
 end
-
+def correct_user
+  @user=User.find(params[:id])
+  #as kant fe edit bas before filter msh hat5aly el
+  # @user mt3araf
+  redirect_to root_path unless current_user?(@user)
+end
 end

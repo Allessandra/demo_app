@@ -63,5 +63,6 @@
 
 <%= yield %>
 <%= debug(params) if Rails.env.development?%>
-</body>
+<%= debug(request)if Rails.env.development?%>
+</body> 
 </html>

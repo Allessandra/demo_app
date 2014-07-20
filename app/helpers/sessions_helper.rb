@@ -17,6 +17,9 @@ def current_user #getter
   @current_user||=User.find_by_remember_token(cookies[:remember_token])
 end
 
+def current_user?(user)
+  user==current_user
+end
 def signed_in?
   !current_user.nil? #call getter
   #signed in is true when current user isn't 
@@ -25,7 +28,10 @@ end
 
 def sign_out
   self.current_user=nil
-  cookies.delete(:remember_token) 
-  
+  cookies.delete(:remember_token)  
+end
+
+def store_location
+  session[:return_to]= request.fullpath
 end
 end
