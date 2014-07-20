@@ -23,22 +23,25 @@
 				<ul class="nav navbar-nav">   
 				 <li><%= link_to "About" , about_path %></li>           
 				 <li><%= link_to "Sign Up" , signup_path %></li>         
-				</ul> 
+				
 				<% if signed_in? %>
-					<li><%= link_to "Profile" , user_path([:id])%></li>           
+				<li><%= link_to "Users" , "#" %></li>  
 					<li id="fat-menu" class="dropdown">
 						<a href="a" class="dropdown-toggle"data-toggle="dropdown">
 						Account <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
+						<li><%= link_to "Profile" , user_path([:id])%></li>           
 						<li><%= link_to "Settings" , "#" %></li>           
-					    <li><%= link_to "Users" , "#" %></li>           
+					             
 						<li class="divider"></li>
 						<li>
-							<%= link_to "Sign out",signout_path , method: "destroy"%>
+							<%= link_to "Sign out",signout_path , method: "delete" %>
 						</li>
 						</ul>
+						</ul> 
 				<% else %> 
+				</ul>
 				<%= render 'layouts/signin'%>   
 				 <% end %>
 			</div><!--/.navbar-collapse -->     

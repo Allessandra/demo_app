@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post '/send_email' => 'blogs#send_email'
   
-  get '/signout' => 'sessions#destroy' 
+  delete '/signout' => 'sessions#destroy' 
  
  
 
