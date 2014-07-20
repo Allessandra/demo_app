@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Users", :type => :request do
   subject {page}
+  
   describe "Sign up page" do
   it "should have the h1 'Sign up'" do
     visit signup_path
@@ -24,6 +25,7 @@ RSpec.describe "Users", :type => :request do
     #it { should have_selector('title', text: user.name) }
 
   end
+  
   describe "sign up"do
     before{visit signup_path}
     let(:submit){"Create my account"}
@@ -47,9 +49,9 @@ RSpec.describe "Users", :type => :request do
       fill_in "Confirmation",with:"foobarbaz"
       end
       end
+      
       it "should create user"do
-      expect{click_button submit}.to change(User,:count).by(1)
-      end
+       expect{click_button submit}.to change(User,:count).by(1)
       #old_count=User.count
       #it "should create user"do
       #fill_in "Name",with:"Example user"
@@ -60,13 +62,55 @@ RSpec.describe "Users", :type => :request do
       #new_count=User.count
       #new_count.should==old_count+1
       #end
+      end
+      
       describe"after saving a user"do
-        before{click_button submit}
+        before do 
+          click_button submit
+          puts page.body
+        end
         let(:user){User.find_by_email("user@example.com")}
         it { expect(page).to have_title("Demo | #{user.name}")}
-        it {should have_link ('Sign out')}
+        it {should have_link('Sign out')}
+        it {should have_selector('div.alert.alert-success')}
       end
     end
   end
-  
+  describe "edit" do
+    let(:user){FactoryGirl.create(:user)}
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
+    describe "page"do
+      it { should have_selector('h1', text: "Update your profile") }
+      it { expect(page).to have_title("Demo | Edit User")}
+      it {should have_link('change', href:'http://gravatar.com/emails')}
+    end
+    describe"with invalid info"do
+      before{click_button "Save changes"}
+      it {should have_content('error')}
+    end
+    describe "with valid info"do
+    let(:new_name){"New Name"}
+    let(:new_email){"new@example.com"}
+    before do
+      within("form.edit_user") do
+      fill_in "Name" , with: new_name
+      fill_in "Email", with: new_email
+      fill_in "Password", with: user.password
+      fill_in "Confirm Password", with: user.password
+      click_button "Save changes"
+      #puts "-------------", page.body
+      end
+    end
+    it { expect(page).to have_title("Demo | #{new_name}")}
+    it {should have_link('Sign out'),href: signout_path}
+    it {should have_selector('div.alert.alert-success')}
+    specify {user.reload.name.should==new_name} #-> it {should user.name == new_name}
+    specify {user.reload.email.should==new_email}
+
+   end
+  end
+    
 end

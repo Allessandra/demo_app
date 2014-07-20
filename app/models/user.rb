@@ -3,7 +3,10 @@ has_secure_password
 
 before_save{|user| user.email=user.email.downcase}
 #before_save{|user| user.remember_token="hhh"}
-before_save :create_remember_token
+before_save :create_remember_token #as when we 
+#update and save it creates another token
+#so the sign in appears
+
 
 before_validation do |user| 
   o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten 
