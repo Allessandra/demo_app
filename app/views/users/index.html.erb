@@ -1,0 +1,12 @@
+<% provide (:title),'All Users'%>
+<h1>All Users</h1>
+
+<%= will_paginate%>
+
+ <ul calss="users">
+ 	<!-- <%# User.all.each do |user|%> -->
+ 	<% @users.each do |user|%>
+ 		<%= render 'user',user: user%>
+ 	<%end%>
+ </ul>
+<%= will_paginate%>

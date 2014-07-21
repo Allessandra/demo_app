@@ -3,16 +3,60 @@ require 'rails_helper'
 RSpec.describe "Users", :type => :request do
   subject {page}
   
+  describe"index"do
+    let(:user){FactoryGirl.create(:user)}
+    before(:all){30.times{FactoryGirl.create(:user)}}
+    after(:all){User.delete_all}
+    before(:each)do
+      sign_in user
+      # sign_in FactoryGirl.create(:user)
+      # FactoryGirl.create(:user, name:"Bob",email:"bob@example.com")
+      # FactoryGirl.create(:user, name:"Ben",email:"ben@example.com")
+      visit users_path
+    end
+    it {should have_selector('h1', text: "All Users") }
+    it {expect(page).to have_title("Demo | All Users")}
+    
+    describe "pagination"do
+      it {should have_selector('div.pagination')}
+      it "should list each user"do
+        #User.all.each do |user|
+        User.paginate(page: 1).each do |user|
+          page.should have_selector('li>a',text:user.name)
+        end
+      end
+     describe "delete links"do
+        it {should_not have_link('delete')}
+        describe "as an admin"do
+            let(:admin){FactoryGirl.create(:admin)}
+            before do
+              sign_in admin
+              visit users_path
+            end
+            it {should have_link('delete', href: user_path(User.first))}
+            it "should be able to delete another users"do
+              expect{click_link('delete')}.to change(User, :count).by(-1)
+            end
+            it{should_not have_link('delete',href:user_path(admin))}
+         end
+      end
+    end
+    
+    
+    
+    
+  end 
+   
   describe "Sign up page" do
-  it "should have the h1 'Sign up'" do
-    visit signup_path
-    page.should have_content("Sign up")
-  end
-   it "should have the title 'Sign up'" do
-    visit signup_path
-    save_and_open_page
-    expect(page).to have_title('Demo | Sign up')
-  end
+    it "should have the h1 'Sign up'" do
+      visit signup_path
+      page.should have_content("Sign up")
+    end
+    it "should have the title 'Sign up'" do
+      visit signup_path
+      save_and_open_page
+      expect(page).to have_title('Demo | Sign up')
+    end
   end
   
   describe "profile page" do

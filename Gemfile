@@ -18,6 +18,7 @@ group :production do
   gem 'pg'
 end
 
+gem 'will_paginate'
 gem 'bootstrap-sass'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
