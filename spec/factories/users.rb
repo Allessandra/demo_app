@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :user do
     sequence(:name){|n| "Person #{n}"}
     sequence(:email){|n| "person_#{n}@example.com"}
-
     #name "Allessandra"
     #email "allessandra@gmail.com"
     password "foobarbaz"
@@ -13,5 +12,10 @@ FactoryGirl.define do
     factory :admin do
       admin true
     end
+  end
+  factory :post do
+    title "test"
+    content "loren ipsum"
+    user
   end
 end

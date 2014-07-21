@@ -14,6 +14,7 @@ end
 
 def show
   @user=User.find(params[:id])
+  @posts=@user.posts.paginate(page: params[:page])
 end
 
 def create #handle
@@ -33,7 +34,8 @@ def edit #edit view
 end
 
 def update #handle edit form
-  @user=User.find(params[:id])
+  #@user=User.find(params[:id]) as hya fe current
+  # user
   if @user.update_attributes(user_params)
     #handle successful update
     sign_in @user

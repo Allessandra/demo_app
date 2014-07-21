@@ -14,17 +14,19 @@ it {should respond_to(:password_confirmation)}
 it {should respond_to(:authenticate)}
 it {should respond_to(:remember_token)}
 it {should respond_to(:admin)}
+it {should respond_to(:posts)}
+
 
 it {should be_valid}
 it {should_not be_admin}
 
-describe "accessible attributes"do
-  it "should not allow access to admin"do
-    expect do
-      User.new(admin: "1")
-    end
-  end
-end
+# describe "accessible attributes"do
+  # it "should not allow access to admin"do
+    # expect do
+      # User.new(admin: "1")
+    # end
+  # end
+#end
 
 
 describe "when name is not present" do
@@ -111,7 +113,25 @@ describe "remember token"do
   end
 end
 
-
+describe "post associations"do
+  before{@user.save}
+  let!(:older_post)do
+    FactoryGirl.create(:post, user:@user,created_at: 1.day.ago)
+  end
+  let!(:newer_post)do
+    FactoryGirl.create(:post, user:@user, created_at: 1.hour.ago)
+  end
+  it "should have the right post in the right order" do
+    @user.posts.should==[newer_post,older_post]
+  end
+  it "should destroy associated posts"do
+    posts=@user.posts
+    @user.destroy
+    posts.each do |post|
+      Post.find_by_id(post.id).should be_nil
+    end
+  end
+end
 
 
 

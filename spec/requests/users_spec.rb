@@ -61,13 +61,23 @@ RSpec.describe "Users", :type => :request do
   
   describe "profile page" do
     let(:user){FactoryGirl.create(:user)}
+    let!(:m1){FactoryFirl.create(:post, user: user,title:"tests", content:"foo")}
+    let!(:m2){FactoryFirl.create(:post, user: user,title:"tests", content:"foo")}
+
     before do
       visit user_path(user)
     end
     it { should have_selector('h1', text: user.name) }
     it { expect(page).to have_title("Demo | #{user.name}")}
     #it { should have_selector('title', text: user.name) }
+    describe"posts"do
+      it{should have_content(m1.title)}
+      it{should have_content(m1.content)}
+      it{should have_content(m2.title)}
+      it{should have_content(m2.content)}
+      it{should have_content(user.posts.count)}
 
+    end
   end
   
   describe "sign up"do
