@@ -1,0 +1,28 @@
+<%= provide(:title, "Edit Post")%>
+ <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+                <h1>Edit Post</h1>
+                <p>This is the edit page!</p>
+          </div>
+          <div class="col-sm-7">
+            <%= form_for @post do |f| %>
+                 <%= render 'shared/error_messages', object: f.object %>
+                
+                <div class="form-group">
+                  <%= f.text_field :title, :class =>"form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= f.text_field :content, :class =>"form-control" %>
+                </div>
+                
+                
+                <%= f.submit  "Save changes", :class => "btn btn-primary" %>
+                
+              <% end %>
+          </div>
+        </div>
+      </div>
+</div>
+

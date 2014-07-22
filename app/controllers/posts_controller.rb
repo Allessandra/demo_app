@@ -1,7 +1,7 @@
 class PostsController <ApplicationController
   
   before_filter :signed_in_user ,only:[:create, :destroy]
-  before_filter :correct_user ,only: :destroy
+  before_filter :correct_user ,only: [:destroy ,:edit,:update]
   def create
     @post=current_user.posts.build(post_params)
     if @post.save
@@ -16,6 +16,22 @@ class PostsController <ApplicationController
   def destroy
      @post.destroy
      redirect_to root_path
+  end
+  
+  def edit #edit view
+  end
+
+  def update #handle edit form
+    if @post.update_attributes(post_params)
+      flash[:notice]="Post updated"
+      redirect_to @post
+    else
+      render 'edit'
+    end
+  end
+  def show
+    @post=Post.find(params[:id])
+    
   end
 private
   def post_params
