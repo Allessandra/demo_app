@@ -39,4 +39,13 @@ def redirect_back_or(default)
   redirect_to(session[:return_to]|| default)
   session.delete(:return_to)
 end
+def signed_in_user
+  #flash[:notice]="please sign in"
+  #redirect_to root_path unless signed_in?
+  #raise signed_in?.inspect
+  unless signed_in?
+    store_location
+    redirect_to(root_path, :notice => "please sign in") 
+  end
+end
 end

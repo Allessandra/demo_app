@@ -13,9 +13,5 @@ FactoryGirl.define do
       admin true
     end
   end
-  factory :post do
-    title "test"
-    content "loren ipsum"
-    user
-  end
+  
 end

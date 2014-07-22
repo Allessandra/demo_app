@@ -3,6 +3,8 @@
 Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:create,:destroy]
+  resources :posts , only:[:create,:destroy]
+  
   root :to => 'blogs#home'
   get '/about' => 'blogs#about'
   get '/contact' =>'blogs#contact'

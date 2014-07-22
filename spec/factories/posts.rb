@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :post do
-    title "MyString"
-    content "MyText"
-    user_id 1
+    title "test"
+    content "loren ipsum"
+    user
   end
 end

@@ -27,8 +27,11 @@ def self.name_longer_than_eight
   #u_l = []
   #User.all.each{|u| u_l.push(u) if u.name.length >= 8}
   #puts u_l.inspect
-  
   User.where("length(name) > 8")
+end
+
+def feed
+  Post.where("user_id=?",id)
 end
 
 private 

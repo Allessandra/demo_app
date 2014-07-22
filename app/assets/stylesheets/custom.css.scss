@@ -11,6 +11,9 @@ body {
   @extend .has-error;
 }
 
+li{
+  list-style: none;
+}
 /*users index*/
 .users{
   list-style: none;

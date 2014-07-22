@@ -1,10 +1,13 @@
 <% provide(:title, @user.name)%>
+<div class="row">
+<div class="col-md-4">
 <h1>
 	<%= gravatar_for @user%>
 	<%=@user.name%>
 	
 </h1>
-<div class="span8">
+</div>
+<div class="col-md-8">
 	<% if @user.posts.any?%>
 		<h3>Posts(<%= @user.posts.count%>)</h3>
 	
@@ -13,4 +16,5 @@
 		</ol>
 		<%=will_paginate @posts%>
 	<%end%>
+</div>
 </div>

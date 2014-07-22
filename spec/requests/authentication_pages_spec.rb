@@ -48,6 +48,7 @@ RSpec.describe "AuthenticationPages", :type => :request do
       describe "after signing in"do
         it "should render the desired protected page" do
           expect(page).to have_title("Demo | Edit User")
+        end
       end
       describe "when sign in again"do
         before do
@@ -58,11 +59,12 @@ RSpec.describe "AuthenticationPages", :type => :request do
           expect(page).to have_title("Demo | #{user.name}")
         end
        end
-     end
+      end
       
-    end
+    
     
     describe "in the users controller"do
+    
       describe"visiting the edit page"do
         before {visit edit_user_path(user)}
         it { expect(page).to have_title("Demo")}
@@ -74,13 +76,23 @@ RSpec.describe "AuthenticationPages", :type => :request do
         it{expect(response).to redirect_to(root_path)}
         #specify {response.should redirect_to(root_path)}
       end
-        describe"visiting the user index"do
+      describe"visiting the user index"do
         before{visit users_path}
         it { expect(page).to have_title("Demo")}
-
-        end
-     end
-     
+      end
+    end
+   end
+   describe"in the posts controller"do
+    describe "submitting to the create action"do
+      before{post posts_path}
+      specify{response.should redirect_to(root_path)}
+    end
+    describe"submitting to destroy action"do
+      before{delete post_path(FactoryGirl.create(:post))}
+      specify{response.should redirect_to(root_path)}
+    end
+   end
+  end
   describe"as wrong user"do
     let(:user){FactoryGirl.create(:user)}
     let(:wrong_user){FactoryGirl.create(:user, email:"wrong@example.com")}
@@ -106,5 +118,5 @@ RSpec.describe "AuthenticationPages", :type => :request do
     specify{response.should redirect_to(root_path)}
   end
  end
-end
-end
+
+

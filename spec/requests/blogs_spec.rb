@@ -2,13 +2,29 @@ require 'rails_helper'
 
 RSpec.describe "Blogs", :type => :request do
 describe "Home page" do
+  before{visit root_path}
+  
   it "should have the h1 'Home'" do
-    visit root_path
     page.should have_content("Home")
   end
-   it "should have the title 'Demo'" do
-    visit root_path
+  it "should have the title 'Demo'" do
     expect(page).to have_title('Demo' )
+  end
+  describe"for signed-in users"do
+    let(:user){FactoryGirl.create(:user)}
+    before do
+      FactoryGirl.create(:post,user:user,title:"test",content:"loren ipsum")
+      FactoryGirl.create(:post,user:user,title:"test2",content:"loren Daltex")
+      sign_in user
+      visit root_path
+    end
+    it "should render the user's feed"do
+      user.feed.each do |item|
+        page.should have_selector("li##{item.id}",text: item.title)
+        page.should have_selector("li##{item.id}",text: item.content)
+
+      end
+    end
   end
 end
  describe "About page" do

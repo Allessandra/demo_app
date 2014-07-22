@@ -1,9 +1,18 @@
 <li>
-	<span class="title">
-		<h4><%= post.title%></h4>
-	</span>
-	<span class="content"><%= post.content%></span>
+		<div class="row">
+			<div class="col-md-6">
+				<h4><span class="title"><%= post.title%></span></h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<span class="content"><%= post.content%></span>
+			</div>
+		</div>
 	<span class="timestamp">
-		Posted<%= time_ago_in_words(post.created_at)%> ago.
+		Posted <%= time_ago_in_words(post.created_at)%> ago.
 	</span>
+	<% if current_user?(post.user)%>
+		<%= link_to "delete",post,method: :delete, confirm:"you sure?" %>
+	<% end%>	                          
 </li>
