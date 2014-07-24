@@ -16,6 +16,11 @@ it {should respond_to(:remember_token)}
 it {should respond_to(:admin)}
 it {should respond_to(:posts)}
 it {should respond_to(:feed)}
+it {should respond_to(:relationships)}
+it {should respond_to(:followed_users)}
+it {should respond_to(:followed_users)}
+it {should respond_to(:following?)}
+it {should respond_to(:follow!)}
 
 it {should be_valid}
 it {should_not be_admin}

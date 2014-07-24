@@ -17,6 +17,8 @@ it {should respond_to(:user)} #due to relation
 its(:user) {should==user}
 
 it {should be_valid}
+
+
 describe "when user_id isn't present"do
   before{@post.user_id=nil}
   it {should_not be_valid}

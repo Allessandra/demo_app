@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
 has_secure_password
 has_many :posts ,dependent: :destroy
+has_many :relationships, foreign_key: "follower_id",dependent: :destroy
+#to make relationship deleted when user is deleted
+
+has_many :followed_users ,through: :relationships,source:followed
 
 before_save{|user| user.email=user.email.downcase}
 #before_save{|user| user.remember_token="hhh"}
@@ -23,6 +27,13 @@ uniqueness: {case_sensitive: false}
 validates :password, presence: true ,length:{minimum:8}
 validates :password_confirmation, presence:true
 
+
+def following?
+  
+end
+def follow!
+  
+end
 def self.name_longer_than_eight
   #u_l = []
   #User.all.each{|u| u_l.push(u) if u.name.length >= 8}
