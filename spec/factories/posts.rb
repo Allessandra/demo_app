@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :post do
     title "test"
-    content "loren ipsum"
+    content "lorem ipsum"
     user
   end
 end

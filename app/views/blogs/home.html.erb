@@ -1,5 +1,6 @@
 <% if signed_in?%>
 	<div calss="row">
+		<div class="col-md-4">
 		<aside class="span4">
 			<section>
 				<%= render 'shared/user_info'%>
@@ -8,9 +9,12 @@
 				<%= render 'shared/post_form'%>				
 			</section>
 		</aside>
+		</div>
 		<div class="span8">
+			<div class="col-md-8">
 			<h3>Post Feed</h3>
 			<%= render'shared/feed'%>
+			</div>
 		</div>
 	</div>
 	
