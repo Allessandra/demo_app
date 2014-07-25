@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-before_filter :signed_in_user ,only: [:index, :edit ,:update ,:destroy]
+before_filter :signed_in_user ,only: [:index, :edit ,:update ,:destroy,
+  :following, :followers]
 before_filter :correct_user, only: [:edit , :update]
 before_filter :admin_user, only: :destroy
 def index
@@ -52,6 +53,18 @@ def destroy
   redirect_to users_path
 end
 
+def following
+  @title="following"
+  @user=User.find(params[:id])
+  @users=@users.followed_users.paginate(page: params[:page])
+  render 'show_follow'
+end
+
+def followers
+  @title="followers"
+  @user=User.find(params[:id])
+  @users=@users.followers.paginate(page: params[:page])
+  render 'show_follow'end
 
 private
 def user_params

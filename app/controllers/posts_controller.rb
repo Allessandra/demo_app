@@ -8,7 +8,7 @@ class PostsController <ApplicationController
       flash[:notice]="Post created"
       redirect_to root_path
     else
-      @feed_items=[]
+      @feed_items=current_user.feed.paginate(page: params[:page])
       render 'blogs/home'
     end
   end

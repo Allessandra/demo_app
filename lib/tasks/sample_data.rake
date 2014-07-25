@@ -1,7 +1,14 @@
 namespace :db do
   desc "fill database with sample data"
   task populate: :environment do
-    admin=User.create!(name:"example user",
+    make_users
+    make_posts
+    make_relationships
+ end
+end
+
+ def make_users
+   admin=User.create!(name:"example user",
     email: "example@hotmail.com",
     password: "foobarbaz",
     password_confirmation: "foobarbaz")
@@ -15,7 +22,9 @@ namespace :db do
       password: password,
       password_confirmation: password)
     end
-  
+ end
+ 
+ def make_posts
   users=User.limit(6)
   50.times do
     title=Faker::Lorem.word
@@ -23,4 +32,14 @@ namespace :db do
     users.each{|user| user.posts.create!(content: content, title: title)}
   end
  end
-end
+ 
+ def make_relationships
+   users = User.all
+   user = users.first
+   followed_users = users[2..50]
+   followers = users[3..40]
+   followed_users.each{|followed| user.follow!(followed)}
+   followers.each {|follower|follower.follow!(user) }
+ end
+ 
+

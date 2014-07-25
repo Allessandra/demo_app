@@ -22,8 +22,16 @@ describe "Home page" do
       user.feed.each do |item|
         page.should have_selector("li##{item.id}",text: item.title)
         page.should have_selector("li##{item.id}",text: item.content)
-
       end
+    end
+    describe "follower/following count" do
+      let(:other_user){FactoryGirl.create(:user)}
+      before do
+        other_user.follow!(user)
+        visit root_path
+      end
+      it {should have_link("0 following",href: following_user_path)}
+      it {should have_link("1 followers",href: followers_user_path)}
     end
   end
 end

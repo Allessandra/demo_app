@@ -1,10 +1,16 @@
 
 
 Rails.application.routes.draw do
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+   
+  end
   resources :sessions, only: [:create,:destroy]
-  resources :posts , only:[:create,:destroy, :edit,:update,:show]
-  
+  resources :posts , only: [:create,:destroy, :edit,:update,:show]
+  resources :relationships , only: [:create,:destroy]
+
   root :to => 'blogs#home'
   get '/about' => 'blogs#about'
   get '/contact' =>'blogs#contact'

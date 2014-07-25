@@ -3,8 +3,11 @@ has_secure_password
 has_many :posts ,dependent: :destroy
 has_many :relationships, foreign_key: "follower_id",dependent: :destroy
 #to make relationship deleted when user is deleted
+has_many :followed_users ,through: :relationships,source: :followed
 
-has_many :followed_users ,through: :relationships,source:followed
+has_many :reverse_relationships, foreign_key: "followed_id",
+class_name:"Relationship",dependent: :destroy
+has_many :followers ,through: :reverse_relationships,source: :follower
 
 before_save{|user| user.email=user.email.downcase}
 #before_save{|user| user.remember_token="hhh"}
@@ -28,12 +31,19 @@ validates :password, presence: true ,length:{minimum:8}
 validates :password_confirmation, presence:true
 
 
-def following?
-  
+def following?(other_user)
+  self.relationships.find_by_followed_id(other_user.id)
 end
-def follow!
-  
+
+def follow!(other_user)
+  self.relationships.create!(followed_id: other_user.id)
+  #create : raise exception if there's error
 end
+
+def unfollow!(other_user)
+  self.relationships.find_by_followed_id(other_user.id).destroy
+end
+
 def self.name_longer_than_eight
   #u_l = []
   #User.all.each{|u| u_l.push(u) if u.name.length >= 8}
@@ -42,7 +52,8 @@ def self.name_longer_than_eight
 end
 
 def feed
-  Post.where("user_id=?",id)
+  #Post.where("user_id=?",id)
+  Post.from_users_followed_by(self)
 end
 
 private 

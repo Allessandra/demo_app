@@ -61,8 +61,6 @@ RSpec.describe "AuthenticationPages", :type => :request do
        end
       end
       
-    
-    
     describe "in the users controller"do
     
       describe"visiting the edit page"do
@@ -80,6 +78,15 @@ RSpec.describe "AuthenticationPages", :type => :request do
         before{visit users_path}
         it { expect(page).to have_title("Demo")}
       end
+      
+      describe"visiting the following page" do
+        before{visit following_user_path(user) }
+        it { expect(page).to have_title("Demo")}
+      end
+      describe"visiting the followers page" do
+        before{visit followers_path(user) }
+        it { expect(page).to have_title("Demo")}
+      end
     end
    end
    describe"in the posts controller"do
@@ -93,6 +100,18 @@ RSpec.describe "AuthenticationPages", :type => :request do
     end
    end
   end
+  
+  describe"in the relationships controller" do
+    describe "submitting to the create action"do
+      before{post relationships_path}
+      specify{response.should redirect_to(root_path)}
+    end
+    describe"submitting to destroy action"do
+      before{delete relationship_path(1)}
+      specify{response.should redirect_to(root_path)}
+    end
+  end
+  
   describe"as wrong user"do
     let(:user){FactoryGirl.create(:user)}
     let(:wrong_user){FactoryGirl.create(:user, email:"wrong@example.com")}
