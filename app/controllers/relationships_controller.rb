@@ -12,7 +12,7 @@ before_filter :signed_in_user
   end
 	
 	def destroy
-	  @user=Relationship.find(params[:id]).follow
+	  @user=Relationship.find(params[:id]).followed
 	  current_user.unfollow!(@user)
 	  respond_to do |format|
       format.html{redirect_to @user}

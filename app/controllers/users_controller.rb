@@ -54,17 +54,18 @@ def destroy
 end
 
 def following
-  @title="following"
+  @title="Following"
   @user=User.find(params[:id])
-  @users=@users.followed_users.paginate(page: params[:page])
+  @users=@user.followed_users.paginate(page: params[:page])
   render 'show_follow'
 end
 
 def followers
-  @title="followers"
+  @title="Followers"
   @user=User.find(params[:id])
-  @users=@users.followers.paginate(page: params[:page])
-  render 'show_follow'end
+  @users=@user.followers.paginate(page: params[:page])
+  render 'show_follow'
+end
 
 private
 def user_params
